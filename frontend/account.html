@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ account_type }} portal · CampusPro</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'login.css' %}" />
+</head>
+<body>
+  <main class="login-card teacher-card">
+    <div class="login-brand"><span aria-hidden="true">🎓</span><strong>Campus<span>Pro</span></strong></div>
+    <p class="eyebrow">{{ account_type|upper }} PORTAL</p>
+    <h1>Welcome, {{ account.user.first_name }}{% if account.user.last_name %} {{ account.user.last_name }}{% endif %}</h1>
+    <p class="intro">You are signed in to your {{ account_type|lower }} account.</p>
+    <dl class="teacher-details">
+      {% if account_type == "Student" %}
+        <div><dt>Student ID</dt><dd>{{ account.student_id }}</dd></div>
+        <div><dt>Course</dt><dd>{{ account.course|default:account.current_class }}</dd></div>
+        <div><dt>Year</dt><dd>{{ account.year|default:"Not provided" }}</dd></div>
+        <div><dt>Status</dt><dd>{{ account.status }}</dd></div>
+      {% else %}
+        <div><dt>Parent ID</dt><dd>{{ account.parent_id }}</dd></div>
+        <div><dt>Student</dt><dd>{{ account.student.user.get_full_name|default:account.student.user.first_name }}</dd></div>
+        <div><dt>Student ID</dt><dd>{{ account.student.student_id }}</dd></div>
+        <div><dt>Course</dt><dd>{{ account.student.course|default:account.student.current_class }}</dd></div>
+        <div><dt>Year</dt><dd>{{ account.student.year|default:"Not provided" }}</dd></div>
+        <div><dt>Relationship</dt><dd>{{ account.relation|default:"Not provided" }}</dd></div>
+        <div><dt>Contact number</dt><dd>{{ account.contact_number }}</dd></div>
+        <div><dt>Status</dt><dd>{{ account.status }}</dd></div>
+      {% endif %}
+    </dl>
+    <form method="post" action="{% url 'frontend-logout' %}">
+      {% csrf_token %}
+      <button type="submit">Log out</button>
+    </form>
+  </main>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in · CampusPro</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'login.css' %}" />
+</head>
+<body>
+  <main class="login-card">
+    <div class="login-brand"><span aria-hidden="true">🎓</span><strong>Campus<span>Pro</span></strong></div>
+    <p class="eyebrow">COLLEGE MANAGEMENT</p>
+    <h1>Welcome back</h1>
+    <p class="intro">Staff: use your username. Teachers: use your Teacher ID or registered email. Students and parents: use your ID. All accounts sign in with their password.</p>
+
+    <form method="post">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="login-error" role="alert">{{ form.non_field_errors }}</div>
+      {% endif %}
+      <label for="{{ form.username.id_for_label }}">Username, account ID, or teacher email</label>
+      <input id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" type="text"
+             value="{{ form.username.value|default_if_none:'' }}" autocomplete="username" required autofocus />
+      {% if form.username.errors %}<div class="field-error" role="alert">{{ form.username.errors }}</div>{% endif %}
+
+      <label for="{{ form.password.id_for_label }}">Password</label>
+      <input id="{{ form.password.id_for_label }}" name="{{ form.password.html_name }}" type="password"
+             autocomplete="current-password" required />
+      {% if form.password.errors %}<div class="field-error" role="alert">{{ form.password.errors }}</div>{% endif %}
+
+      <button type="submit">Sign in</button>
+    </form>
+  </main>
+</body>
+</html>

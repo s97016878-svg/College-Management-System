@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher portal · CampusPro</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'login.css' %}" />
+</head>
+<body>
+  <main class="login-card teacher-card">
+    <div class="login-brand"><span aria-hidden="true">🎓</span><strong>Campus<span>Pro</span></strong></div>
+    <p class="eyebrow">TEACHER PORTAL</p>
+    <h1>Welcome, {{ teacher.user.first_name }}{% if teacher.user.last_name %} {{ teacher.user.last_name }}{% endif %}</h1>
+    <p class="intro">You are signed in to your teacher account.</p>
+    <dl class="teacher-details">
+      <div><dt>Teacher ID</dt><dd>{{ teacher.teacher_id }}</dd></div>
+      <div><dt>Department</dt><dd>{{ teacher.subject }}</dd></div>
+      <div><dt>Email</dt><dd>{{ teacher.user.email|default:"Not provided" }}</dd></div>
+      <div><dt>Status</dt><dd>{{ teacher.status }}</dd></div>
+    </dl>
+    <form method="post" action="{% url 'frontend-logout' %}">
+      {% csrf_token %}
+      <button type="submit">Log out</button>
+    </form>
+  </main>
+</body>
+</html>

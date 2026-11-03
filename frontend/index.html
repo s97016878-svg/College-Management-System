@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>College Management System</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'style.css' %}" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-icon">🎓</div>
+        <div><strong>Campus<span>Pro</span></strong><small>College Management</small></div>
+      </div>
+      <div class="nav-label">MAIN MENU</div>
+      <nav id="nav">
+        <button class="nav-item active" data-page="Dashboard"><span>▦</span> Dashboard</button>
+        <button class="nav-item" data-page="Students"><span>♟</span> Students</button>
+        <button class="nav-item" data-page="Teachers"><span>♙</span> Teachers</button>
+        <button class="nav-item" data-page="Parents"><span>♧</span> Parents</button>
+        <button class="nav-item" data-page="Courses"><span>▤</span> Courses</button>
+        <button class="nav-item" data-page="Admissions"><span>✚</span> Admissions</button>
+        <button class="nav-item" data-page="Attendance"><span>☑</span> Attendance</button>
+        <button class="nav-item" data-page="Examinations"><span>▣</span> Examinations</button>
+        <button class="nav-item" data-page="Results"><span>▥</span> Results</button>
+        <button class="nav-item" data-page="Fees Management"><span>₹</span> Fees Management</button>
+        <button class="nav-item" data-page="Notices"><span>◉</span> Notices</button>
+        <button class="nav-item" data-page="Settings"><span>⚙</span> Settings</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="help-box"><strong>Need help?</strong><p>Manage your campus in one place.</p><button id="helpBtn">View guide ↗</button></div><button class="nav-item" id="logoutBtn"><span>⇥</span> Log out</button></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+        <div class="crumb">Pages <span>/</span> <strong id="breadcrumb">Dashboard</strong></div>
+        <div class="top-actions">
+          <label class="search"><span>⌕</span><input id="globalSearch" type="search" placeholder="Search anything..." /></label>
+          <button class="icon-btn notification" aria-label="Notifications">♧<i></i></button>
+          <div class="profile"><div class="avatar">AD</div><div><strong>{{ admin_name }}</strong><small>Administrator</small></div><span>⌄</span></div>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="page-heading">
+          <div><p class="eyebrow">OVERVIEW</p><h1 id="pageTitle">Dashboard Overview</h1><p class="subheading" id="pageSubtitle">Welcome back! Here's what's happening at your college today.</p></div>
+          <button class="primary-btn" id="reportBtn">↧ &nbsp; Download report</button>
+        </div>
+
+        <div id="dashboardPage">
+          <div class="stats-grid">
+            <article class="stat-card"><div class="stat-top"><div class="stat-icon blue">♟</div><span class="trend positive">↗ 8.2%</span></div><p>Total Students</p><h2>2,450</h2><small>Compared to last semester</small><div class="mini-bars blue-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+            <article class="stat-card"><div class="stat-top"><div class="stat-icon purple">♙</div><span class="trend positive">↗ 3.4%</span></div><p>Total Teachers</p><h2>128</h2><small>Across all departments</small><div class="mini-bars purple-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+            <article class="stat-card"><div class="stat-top"><div class="stat-icon orange">▤</div><span class="trend positive">↗ 2 new</span></div><p>Active Courses</p><h2>32</h2><small>Available this semester</small><div class="mini-bars orange-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+            <article class="stat-card"><div class="stat-top"><div class="stat-icon green">₹</div><span class="trend positive">↗ 12.5%</span></div><p>Fees Collected</p><h2>₹18.6L</h2><small>Of ₹24 lakh expected</small><div class="mini-bars green-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="panel attendance-panel">
+              <div class="panel-heading"><div><h3>Attendance Overview</h3><p>Student attendance during this week</p></div><select id="attendancePeriod"><option>This week</option><option>This month</option></select></div>
+              <div class="chart-legend"><span><i class="dot blue-dot"></i> Present</span><span><i class="dot purple-dot"></i> Absent</span></div>
+              <div class="bar-chart" id="barChart">
+                <div class="bar-group"><div class="bar-stack"><i style="height:68%"></i><b style="height:17%"></b></div><small>Mon</small></div>
+                <div class="bar-group"><div class="bar-stack"><i style="height:78%"></i><b style="height:12%"></b></div><small>Tue</small></div>
+                <div class="bar-group"><div class="bar-stack"><i style="height:62%"></i><b style="height:20%"></b></div><small>Wed</small></div>
+                <div class="bar-group"><div class="bar-stack"><i style="height:82%"></i><b style="height:10%"></b></div><small>Thu</small></div>
+                <div class="bar-group"><div class="bar-stack"><i style="height:73%"></i><b style="height:14%"></b></div><small>Fri</small></div>
+                <div class="bar-group"><div class="bar-stack"><i style="height:54%"></i><b style="height:24%"></b></div><small>Sat</small></div>
+                <div class="bar-group"><div class="bar-stack"><i style="height:20%"></i><b style="height:5%"></b></div><small>Sun</small></div>
+              </div>
+            </article>
+            <article class="panel distribution-panel">
+              <div class="panel-heading"><div><h3>Student Distribution</h3><p>Students by department</p></div><button class="more-btn">•••</button></div>
+              <div class="donut-wrap"><div class="donut"><div><strong>2,450</strong><small>Total students</small></div></div></div>
+              <div class="department-list">
+                <div><span><i class="dot blue-dot"></i> Computer Science</span><strong>38%</strong></div>
+                <div><span><i class="dot purple-dot"></i> Commerce</span><strong>26%</strong></div>
+                <div><span><i class="dot orange-dot"></i> Science</span><strong>22%</strong></div>
+                <div><span><i class="dot green-dot"></i> Arts & Humanities</span><strong>14%</strong></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="bottom-grid">
+            <article class="panel table-panel">
+              <div class="panel-heading"><div><h3>Recent Students</h3><p>Recently enrolled students</p></div><button class="text-btn" data-goto="Students">View all →</button></div>
+              <div class="table-scroll"><table><thead><tr><th>STUDENT</th><th>COURSE</th><th>YEAR</th><th>STATUS</th></tr></thead><tbody>
+                <tr><td><div class="person"><span class="person-avatar a1">AS</span><span><strong>Aarav Sharma</strong><small>STU-2026-001</small></span></div></td><td>BCA</td><td>1st Year</td><td><span class="badge success">Active</span></td></tr>
+                <tr><td><div class="person"><span class="person-avatar a2">PK</span><span><strong>Priya Kumar</strong><small>STU-2026-002</small></span></div></td><td>BBA</td><td>2nd Year</td><td><span class="badge success">Active</span></td></tr>
+                <tr><td><div class="person"><span class="person-avatar a3">RM</span><span><strong>Rahul Mishra</strong><small>STU-2026-003</small></span></div></td><td>B.Sc.</td><td>1st Year</td><td><span class="badge warning">Pending</span></td></tr>
+                <tr><td><div class="person"><span class="person-avatar a4">NG</span><span><strong>Neha Gupta</strong><small>STU-2026-004</small></span></div></td><td>BCA</td><td>3rd Year</td><td><span class="badge success">Active</span></td></tr>
+              </tbody></table></div>
+            </article>
+            <article class="panel events-panel">
+              <div class="panel-heading"><div><h3>Upcoming Events</h3><p>Don't miss what's next</p></div><button class="more-btn">•••</button></div>
+              <div class="event"><div class="event-date"><strong>05</strong><small>NOV</small></div><div><strong>Mid-term Examinations</strong><small>09:00 AM · Main Block</small></div><span class="event-dot purple-bg"></span></div>
+              <div class="event"><div class="event-date green-date"><strong>12</strong><small>NOV</small></div><div><strong>Parent-Teacher Meeting</strong><small>11:00 AM · Seminar Hall</small></div><span class="event-dot green-bg"></span></div>
+              <div class="event"><div class="event-date orange-date"><strong>18</strong><small>NOV</small></div><div><strong>Annual Tech Fest</strong><small>10:00 AM · College Ground</small></div><span class="event-dot orange-bg"></span></div>
+              <button class="view-calendar" data-goto="Notices">View all events →</button>
+            </article>
+          </div>
+        </div>
+
+        <div id="sectionPage" class="panel section-panel hidden">
+          <div class="section-toolbar"><div><h3 id="sectionHeading">Students</h3><p id="sectionDescription">Manage college records</p></div><button class="primary-btn" id="addRecordBtn">＋ Add new</button></div>
+          <div class="section-controls"><label class="search table-search"><span>⌕</span><input id="tableSearch" type="search" placeholder="Search records..." /></label><span id="recordCount">4 records</span></div>
+          <div class="table-scroll"><table><thead id="sectionTableHead"></thead><tbody id="sectionTableBody"></tbody></table></div>
+          <p class="demo-note" id="backendNote">Students, teachers, and parents are saved to the database. Other sections use demo data.</p>
+        </div>
+        <footer>© 2026 CampusPro · College Management System <span>Built for smarter campus management</span></footer>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="recordDialog">
+    <form id="recordForm" method="dialog">
+      <div class="dialog-heading"><div><h2 id="dialogTitle">Add record</h2><p>Enter the details below.</p></div><button type="button" class="close-btn" id="closeDialog">×</button></div>
+      <div id="formFields" class="form-fields"></div>
+      <div class="dialog-actions"><button type="button" class="secondary-btn" id="cancelDialog">Cancel</button><button class="primary-btn" type="submit">Save record</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="{% static 'script.js' %}"></script>
+</body>
+</html>
